@@ -16,8 +16,10 @@ class bank
 
     //constructor to initialize the value of data members
     bank() {
+        name = "NULL";
         accountNo = 0;
         balance = 0;
+        accountType = "NULL";
     }
 
     //member functions to perform the different operations
@@ -33,13 +35,25 @@ void bank :: setData() {
     cout<<"\nEnter the details below: "<<endl;
     cout<<"\nName: ";
     getline(cin, name);
-    cout<<"Account Number: ";
-    cin>>accountNo;
+
+    do {
+        cout<<"Account Number: ";
+        cin>>accountNo;
+        if (accountNo <= 0) 
+            cout<<"\nInvalid Input!! Provide the information again.\n"<<endl;
+    }while (accountNo <= 0);
+
     cin.ignore(1,'\n');
-    cout<<"Account type: ";
+    cout<<"Account type (Savings, Current): ";
     getline(cin, accountType);
-    cout<<"Balance: ";
-    cin>>balance;
+    
+    do {
+        cout<<"Balance: ";
+        cin>>balance;
+        if (balance < 0) 
+            cout<<"\nInvalid Input!! Balance can't be in negative.\n"<<endl;
+    }while (balance < 0);
+    
 }
 
 //receive the amount to be deposited in the account
@@ -47,8 +61,13 @@ void bank :: deposit() {
 
     long int depositAmount;
 
-    cout<<"\nEnter the amount to be deposited: ";
-    cin>>depositAmount;
+    do {
+        cout<<"\nEnter the amount to be deposited: ";
+        cin>>depositAmount;
+        if (depositAmount < 0) 
+            cout<<"\nInvalid Input!! Deposit Amount can't be in negative."<<endl;
+    }while (depositAmount < 0);
+
     balance = balance + depositAmount;
 }
 
@@ -57,8 +76,12 @@ void bank :: withdraw() {
 
     long int withdrawAmount;
 
-    cout<<"\nEnter the amount to be withdrawn: ";
-    cin>>withdrawAmount;
+    do {
+        cout<<"\nEnter the amount to be withdrawn: ";
+        cin>>withdrawAmount;
+        if (withdrawAmount < 0) 
+            cout<<"\nInvalid Input!! Withdrawl Amount can't be in negative."<<endl;
+    }while (withdrawAmount < 0);
 
     //to check whether there is sufficient balance available or not
     if (balance > withdrawAmount) 

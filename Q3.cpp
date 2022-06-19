@@ -35,8 +35,10 @@ int main() {
 
     //accept the updated price of petrol
     float Updated_Price = 0;
-    cout<<"\nEnter the updated price of petrol: Rs. ";
-    cin>>Updated_Price;
+    do {
+        cout<<"\nEnter the updated price of petrol: Rs. ";
+        cin>>Updated_Price;
+    } while (Updated_Price <= 0);
 
     //initializing another object to call the parameterized constructor
     Bill B2(Updated_Price);
