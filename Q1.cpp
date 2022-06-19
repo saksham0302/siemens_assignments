@@ -24,6 +24,9 @@ class Node {
 //implement linked list
 class linkedList {
     Node* head;
+    int length = 0;
+    char choice;
+    int input = 0;
 
     public:
     linkedList() {
@@ -33,32 +36,38 @@ class linkedList {
     //function to print linked list
     void printList();
     //function to insert node
-    void insertNode(int);
-    //function to print mid
-    void printMid(int);
-    //function to print square root element
-    void printSqrt(int);
+    void insertNode();
+    //function to print mid and sqrt element
+    void printMidAndSqrt();
 };
 
-void linkedList :: insertNode (int input) {
+void linkedList :: insertNode () {
 
-    //create the new node
-    Node* newNode = new Node(input);
+    //inserting nodes and asking the user whether he wants to add more node or not
+    cout<<"Enter the data: ";
 
-    //assign new node to head
-    if (head == NULL) {
-        head = newNode;
-        return;
-    }
+    do {
+        cin>>input;
+        //create the new node
+        Node* newNode = new Node(input);
 
-    //traverse till end
-    Node* temp = head;
-    while (temp -> next != NULL) {
-        temp = temp->next;
-    }
+        //assign new node to head
+        if (head == NULL) {
+            head = newNode;
+        }
 
-    //insert node at last
-    temp -> next = newNode;
+        else {
+            Node* temp = head;
+            while (temp -> next != NULL) {
+                temp = temp->next;
+            }
+
+            //insert node at last
+            temp -> next = newNode;
+        }
+        cout<<"Do you wish to add more (press y if yes else press any char): ";
+        cin>>choice;
+    } while (choice == 'y' || choice == 'Y');
 }
 
 void linkedList :: printList() {
@@ -68,47 +77,46 @@ void linkedList :: printList() {
     while(temp != NULL) {
         cout<<temp->input<<" ";
         temp = temp -> next;
+        length++;
     }
 }
 
-void linkedList :: printMid(int mid) {
+void linkedList :: printMidAndSqrt() {
     Node* temp = head;
+    int i=1;
+    
+    int Sqrt = sqrt(length);
+
+    int Mid = (length%2 == 0) ? length/2 : length/2 + 1;
 
     //traverse till mid
-    while(mid > 1) {
-        --mid;
+    while (temp != NULL) {
+        if (i == Mid) {
+            cout<<temp->input<<" ";
+            break;
+        }
+        i++;
         temp = temp -> next;
     }
-    cout<<temp->input<<" ";
-}
 
-void linkedList :: printSqrt(int Sqrt) {
-    Node* temp = head;
+    temp = head;
+    i=1;
 
-    //traverse till sqrt(length) value
-    while(Sqrt > 1) {
-        --Sqrt;
+    while (temp != NULL) {
+        if (i == Sqrt) {
+            cout<<temp->input;
+            break;
+        }
+        i++;
         temp = temp -> next;
     }
-    cout<<temp->input<<endl;
 }
 
 int main() {
 
     linkedList list;
 
-    char choice;
-    int input = 0, length = 0;
-    
-    //inserting nodes and asking the user whether he wants to add more node or not
-    cout<<"Enter the data: ";
-    do {
-        cin>>input;
-        list.insertNode(input);
-        cout<<"Do you wish to add more (press y if yes else press any char): ";
-        cin>>choice;
-        length++;
-    } while (choice == 'y' || choice == 'Y');
+    list.insertNode();
 
     //Print the list
     cout<<"\nElements of the list are: ";
@@ -116,16 +124,8 @@ int main() {
 
     cout<<endl;
 
-    (length % 2 == 0) ? length : length++;
-
     //print the middle element of list
-    int mid = length / 2;
-    list.printMid(mid);
-
-    //print the sqrt(length) element of list
-    int Sqrt = 0;
-    Sqrt = sqrt(length);
-    list.printSqrt(Sqrt);
+    list.printMidAndSqrt();
     
     return 0;
 }
