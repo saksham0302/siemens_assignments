@@ -16,12 +16,14 @@ class Employee {
     //i is used to keep the track of employer number we are at
     void acceptDetails(int i) {
         cout<<"\nEnter the details of employee "<<i+1<<": "<<endl;
+        cin.ignore(1, '\n');
         cout<<"Name: ";
-        cin>>name;
+        getline(cin, name);
         cout<<"Id: ";
         cin>>id;
+        cin.ignore(1, '\n');
         cout<<"Designation: ";
-        cin>>designation;
+        getline(cin, designation);
     }
 };
 

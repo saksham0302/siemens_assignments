@@ -16,9 +16,7 @@ class bank
 
     //constructor to initialize the value of data members
     bank() {
-        name = "NULL";
         accountNo = 0;
-        accountType = "NULL";
         balance = 0;
     }
 
@@ -34,11 +32,12 @@ void bank :: setData() {
 
     cout<<"\nEnter the details below: "<<endl;
     cout<<"\nName: ";
-    cin>>name;
+    getline(cin, name);
     cout<<"Account Number: ";
     cin>>accountNo;
+    cin.ignore(1,'\n');
     cout<<"Account type: ";
-    cin>>accountType;
+    getline(cin, accountType);
     cout<<"Balance: ";
     cin>>balance;
 }
